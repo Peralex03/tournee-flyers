@@ -156,7 +156,7 @@ let me=null, follow=false;
 // ---------- Carte ----------
 const map=L.map("map",{zoomControl:false,preferCanvas:true,attributionControl:true}).setView([46.2,6.14],12);
 L.tileLayer("https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-grau/default/current/3857/{z}/{x}/{y}.jpeg",
-  {maxZoom:19,maxNativeZoom:18,attribution:'© <a href="https://www.swisstopo.admin.ch" target="_blank" rel="noopener">swisstopo</a>'}).addTo(map);
+  {maxZoom:19,maxNativeZoom:18,opacity:.55,attribution:'© <a href="https://www.swisstopo.admin.ch" target="_blank" rel="noopener">swisstopo</a>'}).addTo(map);
 const canvas=L.canvas({padding:.5,tolerance:6});
 const markers={};
 function inSize(b){const [lo,hi]=opts.taille.split("-").map(Number);return b.log>=lo&&b.log<=hi}
@@ -394,7 +394,7 @@ window.addEventListener("resize",positionFab);
 function toast(m){const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2800)}
 
 syncChips();drawAll();showTour(!!tour);
-if(!tour){const vis=B.filter(inSize).map(b=>[b.lat,b.lng]);map.fitBounds(vis,{paddingTopLeft:[20,70],paddingBottomRight:[20,$("s-plan").offsetHeight+20]});}
+if(!tour){map.setView([46.195,6.135],13);}
 // Position dès l'ouverture si déjà autorisée
 if(navigator.permissions&&navigator.permissions.query){navigator.permissions.query({name:"geolocation"}).then(p=>{if(p.state==="granted")startGps()}).catch(()=>{})}
 </script>
